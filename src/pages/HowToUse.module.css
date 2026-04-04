@@ -1,0 +1,89 @@
+.container {
+  padding: 4rem 0;
+  min-height: 80vh;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
+  color: var(--color-text-primary);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .title {
+    font-size: 2rem;
+  }
+}
+
+.card {
+  position: relative;
+  background-color: white;
+  border: 1px solid #d1fae5;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem 2rem 2.5rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-color: #6ee7b7;
+}
+
+.cardNumberBadge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 70px;
+  height: 70px;
+  background-color: #53c58b;
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  display: flex;
+}
+
+.cardNumberText {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  color: white;
+  font-weight: 800;
+  font-size: 1.125rem;
+}
+
+.iconWrapper {
+  margin-bottom: 1.5rem;
+  color: #53c58b;
+  display: inline-block;
+}
+
+.cardTitle {
+  font-size: 1.35rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--color-text-primary);
+  line-height: 1.3;
+}
+
+.cardDesc {
+  color: var(--color-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}

@@ -1,0 +1,182 @@
+.pageTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-bottom: 2rem;
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  border: 1px dashed var(--color-border);
+  text-align: center;
+}
+
+.emptyState img {
+  opacity: 0.8;
+  margin-bottom: 1.5rem;
+}
+
+.emptyState h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-text-primary);
+}
+
+.emptyState p {
+  color: var(--color-text-secondary);
+  margin-bottom: 1.5rem;
+}
+
+.tripList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tripCard {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tripCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.tripHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.tripId {
+  font-weight: 600;
+  color: var(--color-text-secondary);
+}
+
+.statusBadge {
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.statusBadge[data-status="COMPLETED"] {
+  background-color: var(--color-success);
+}
+.statusBadge[data-status="ONGOING"] {
+  background-color: var(--color-primary);
+}
+.statusBadge[data-status="CANCELLED"] {
+  background-color: var(--color-error);
+}
+
+.tripBody {
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.routeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+
+.routeItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.routeItem strong {
+  font-size: 1.125rem;
+  color: var(--color-text-primary);
+}
+
+.routeItem span {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.routeLine {
+  position: absolute;
+  left: 20%;
+  top: 15%;
+  bottom: 15%;
+  width: 2px;
+  background-color: var(--color-border);
+}
+
+.tripStats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  padding-left: 2rem;
+  border-left: 1px solid var(--color-border);
+}
+
+.statBox {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statLabel {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.statValue {
+  font-size: 1.25rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.tripFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.invoiceDetail {
+  padding: 1.5rem;
+  background-color: #f8f9fa;
+  border-top: 1px dashed var(--color-border);
+  color: var(--color-text-primary);
+}
+
+@media (max-width: 768px) {
+  .tripBody {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .tripStats {
+    padding-left: 0;
+    border-left: none;
+    border-top: 1px dashed var(--color-border);
+    padding-top: 1.5rem;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

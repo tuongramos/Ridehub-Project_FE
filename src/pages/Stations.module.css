@@ -1,0 +1,167 @@
+.container {
+  display: flex;
+  height: calc(100vh - 64px); /* Approximation of header height */
+  overflow: hidden;
+  font-family: inherit;
+  background-color: #f8f9fa;
+}
+
+/* Fix depending on whether layout has content padding */
+:global(.content-wrapper) .container {
+  width: calc(100% + 2rem);
+}
+
+.sidebar {
+  width: 340px;
+  min-width: 340px;
+  background-color: white;
+  border-right: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.05);
+  z-index: 10;
+}
+
+.sidebarHeader {
+  background-color: #0d6efd;
+  color: white;
+  padding: 1.2rem;
+  font-weight: 500;
+  font-size: 1.1rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.filterSection {
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.formGroup {
+  margin-bottom: 0.8rem;
+}
+
+.formGroup label {
+  display: block;
+  font-size: 0.85rem;
+  color: #495057;
+  margin-bottom: 0.4rem;
+  font-weight: 400;
+}
+
+.select, .input {
+  width: 100%;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #212529;
+  box-sizing: border-box;
+  background-color: white;
+}
+
+.select:focus, .input:focus {
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+.searchBtn {
+  width: 100%;
+  padding: 0.6rem;
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 0.2rem;
+  transition: background-color 0.2s;
+}
+
+.searchBtn:hover {
+  background-color: #0b5ed7;
+}
+
+.resultsCount {
+  text-align: right;
+  font-size: 0.8rem;
+  color: #6c757d;
+  margin-top: 0.8rem;
+  font-style: italic;
+}
+
+.resultsCount span {
+  font-weight: 600;
+  color: #198754;
+}
+
+.citySection {
+  display: flex;
+  flex-direction: column;
+}
+
+.cityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 1.2rem;
+  background-color: #f1f8ff;
+  font-weight: 600;
+  color: #0d6efd;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+
+.stationList {
+  display: flex;
+  flex-direction: column;
+}
+
+.stationItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.2rem;
+  border-bottom: 1px solid #f1f3f5;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  align-items: flex-start;
+}
+
+.stationItem:hover {
+  background-color: #fafbfc;
+}
+
+.stationInfo {
+  flex: 1;
+  padding-right: 0.8rem;
+}
+
+.stationName {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #212529;
+}
+
+.stationAddress {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #495057;
+  line-height: 1.4;
+}
+
+.stationIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.2rem;
+}
+
+.mapArea {
+  flex: 1;
+  position: relative;
+  background-color: #e9ecef;
+}

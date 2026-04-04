@@ -1,0 +1,338 @@
+.bookingContainer {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.leftCol h2 {
+  font-size: 1.75rem;
+  color: var(--color-primary);
+  margin-bottom: 1.5rem;
+}
+
+.formCard {
+  background-color: var(--color-surface);
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  font-weight: 500;
+  color: var(--color-text-primary);
+  font-size: 0.95rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.datePicker, .select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: inherit;
+  font-size: 1rem;
+  outline: none;
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+  transition: border-color 0.2s;
+}
+
+.datePicker:focus, .select:focus {
+  border-color: var(--color-primary);
+}
+
+.summaryBox {
+  background-color: var(--color-background);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--color-text-secondary);
+}
+
+.summaryItem strong {
+  color: var(--color-text-primary);
+}
+
+.summaryBox hr {
+  border: none;
+  border-top: 1px dashed var(--color-border);
+  margin: 0.5rem 0;
+}
+
+.summaryTotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.totalPrice {
+  color: var(--color-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.vehicleSummary {
+  background-color: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  position: sticky;
+  top: calc(var(--header-height) + 2rem);
+}
+
+.vehicleSummary img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+
+.vehicleInfo {
+  padding: 1.5rem;
+}
+
+.vehicleInfo h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.vehicleInfo p {
+  color: var(--color-text-secondary);
+}
+
+.successBox {
+  padding: 4rem 2rem;
+  background-color: rgba(40, 167, 69, 0.1);
+  border: 1px solid var(--color-success);
+  border-radius: var(--radius-lg);
+}
+
+.successBox h2 {
+  color: var(--color-success);
+  margin-bottom: 1rem;
+}
+
+@media (max-width: 992px) {
+  .bookingContainer { grid-template-columns: 1fr; }
+  .formRow { grid-template-columns: 1fr; }
+  .vehicleSummary { position: static; }
+}
+
+/* Payment Table Styles */
+.paymentContainer {
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: var(--radius-lg);
+  padding: 2.5rem;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.paymentHeader {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #111827;
+  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-block;
+}
+
+.paymentHeader::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 40px;
+  height: 3px;
+  background-color: var(--color-primary);
+}
+
+.billingTable {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e5e7eb;
+}
+
+.billingTable td {
+  padding: 1rem 1.25rem;
+  border: 1px solid #e5e7eb;
+  font-size: 0.95rem;
+  color: #374151;
+}
+
+.billingLabel {
+  background-color: #f9fafb;
+  font-weight: 600;
+  width: 30%;
+  color: #4b5563;
+}
+
+.billingValue {
+  background-color: #ffffff;
+  font-weight: 700;
+  display: flex !important;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.copyBtn {
+  background: none;
+  border: none;
+  color: #4b5563;
+  cursor: pointer;
+  padding: 0.25rem;
+  border-radius: 4px;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.copyBtn:hover {
+  background-color: #e5e7eb;
+  color: var(--color-primary);
+}
+
+.qrRow td {
+  padding: 1.5rem;
+  text-align: center;
+  background-color: #ffffff;
+}
+
+.qrInfoWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.qrPlaceholder {
+  width: 220px;
+  height: 220px;
+  background-image: 
+    linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000), 
+    linear-gradient(45deg, #000 25%, transparent 25%, transparent 75%, #000 75%, #000);
+  background-size: 12px 12px;
+  background-position: 0 0, 6px 6px;
+  background-color: white;
+  margin: 0;
+}
+
+.paymentWarning {
+  color: #dc2626;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-top: 1.5rem;
+}
+
+.bookingSummaryWrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.userInfoBox {
+  background-color: #f8fafc;
+  border-left: 4px solid var(--color-primary);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.smallHeading {
+  font-size: 1.1rem;
+  color: #1e293b;
+  margin-bottom: 0.75rem;
+}
+
+.userInfoBox p {
+  margin-bottom: 0.25rem;
+  color: #475569;
+}
+
+.actualQrImage {
+  width: 100%;
+  max-width: 320px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.paymentActions {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.locationBox {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  background-color: var(--color-surface);
+}
+
+.locationHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.locationTitle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+}
+
+.radioCircle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 4px solid var(--color-success);
+  background-color: transparent;
+}
+
+.freeText {
+  color: var(--color-success);
+  font-weight: 500;
+}
+
+.locationAddress {
+  padding-left: 1.5rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  font-size: 1.05rem;
+}

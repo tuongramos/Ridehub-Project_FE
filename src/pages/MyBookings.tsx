@@ -1,0 +1,136 @@
+import React, { useEffect, useState } from 'react';
+import { api } from '../services/api';
+import type { Trip } from '../types';
+import { Spinner } from '../components/Spinner';
+import { Button } from '../components/Button';
+import { CalendarX } from 'lucide-react';
+import styles from './MyBookings.module.css';
+
+const MyBookings: React.FC = () => {
+  const [trips, setTrips] = useState<Trip[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [expandedTripId, setExpandedTripId] = useState<string | null>(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  useEffect(() => {
+    const checkUserAndFetchTrips = async () => {
+      const storedUser = localStorage.getItem('user');
+      if (!storedUser) {
+        setIsLoggedIn(false);
+        setLoading(false);
+        return;
+      }
+      
+      try {
+        const userTrips = await api.getUserTrips('u1');
+        setTrips(userTrips);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    checkUserAndFetchTrips();
+  }, []);
+
+  const handleStatusChange = async (id: string, status: string) => {
+    await api.updateTripStatus(id, status);
+    const now = new Date().toISOString();
+    setTrips(prev => prev.map(t => t.id === id ? { ...t, status: status as any, ...(status === 'COMPLETED' ? { endTime: now } : {}) } : t));
+  };
+
+  if (loading) return <div className="container mt-8 text-center"><Spinner size="lg" /></div>;
+
+  if (!isLoggedIn) {
+    return (
+      <div className="container mt-8 mb-8">
+        <h1 className={styles.pageTitle}>Quản lý chuyến đi</h1>
+        <div className={styles.emptyState}>
+          <CalendarX size={72} color="var(--color-primary)" style={{ opacity: 0.8, marginBottom: '1.5rem' }} />
+          <h3>Vui lòng đăng nhập</h3>
+          <p>Bạn cần đăng nhập để xem thông tin các chuyến đi của mình.</p>
+          <Button onClick={() => window.location.href='/login'}>Đăng nhập ngay</Button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mt-8 mb-8">
+      <h1 className={styles.pageTitle}>Quản lý chuyến đi</h1>
+      
+      {trips.length === 0 ? (
+        <div className={styles.emptyState}>
+          <CalendarX size={72} color="var(--color-primary)" style={{ opacity: 0.8, marginBottom: '1.5rem' }} />
+          <h3>Bạn chưa có chuyến đi nào</h3>
+          <p>Hàng ngàn chiếc xe đang chờ bạn khám phá. Bắt đầu ngay!</p>
+          <Button onClick={() => window.location.href='/vehicles'}>Thuê xe ngay</Button>
+        </div>
+      ) : (
+        <div className={styles.tripList}>
+          {trips.map(trip => (
+            <div key={trip.id} className={styles.tripCard}>
+              <div className={styles.tripHeader}>
+                <div className={styles.tripId}>Mã chuyến: #{trip.id}</div>
+                <div className={styles.statusBadge} data-status={trip.status}>
+                  {trip.status === 'COMPLETED' ? 'Hoàn thành' : trip.status === 'ONGOING' ? 'Đang diễn ra' : 'Đã hủy'}
+                </div>
+              </div>
+              
+              <div className={styles.tripBody}>
+                <div className={styles.routeInfo}>
+                  <div className={styles.routeItem}>
+                    <strong>Nhận xe</strong>
+                    <span>{new Date(trip.startTime).toLocaleString('vi-VN')}</span>
+                  </div>
+                  <div className={styles.routeLine}></div>
+                  <div className={styles.routeItem}>
+                    <strong>Trả xe</strong>
+                    <span>{trip.status === 'ONGOING' ? 'Chưa trả xe' : new Date(trip.endTime).toLocaleString('vi-VN')}</span>
+                  </div>
+                </div>
+
+                <div className={styles.tripStats}>
+                  <div className={styles.statBox}>
+                    <span className={styles.statLabel}>Khoảng cách</span>
+                    <strong className={styles.statValue}>{trip.distance} km</strong>
+                  </div>
+                  <div className={styles.statBox}>
+                    <span className={styles.statLabel}>Tổng chi phí</span>
+                    <strong className={styles.statValue}>{new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(trip.totalCost)}</strong>
+                  </div>
+                </div>
+              </div>
+
+              <div className={styles.tripFooter}>
+                <Button variant="outline" size="sm" onClick={() => setExpandedTripId(expandedTripId === trip.id ? null : trip.id)}>
+                  {expandedTripId === trip.id ? 'Thu gọn hóa đơn' : 'Xem chi tiết hóa đơn'}
+                </Button>
+                {trip.status === 'ONGOING' && (
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <Button variant="primary" size="sm" onClick={() => handleStatusChange(trip.id, 'COMPLETED')}>Trả xe</Button>
+                    <Button variant="danger" size="sm" onClick={() => handleStatusChange(trip.id, 'CANCELLED')}>Hủy chuyến</Button>
+                  </div>
+                )}
+              </div>
+              
+              {expandedTripId === trip.id && (
+                <div className={styles.invoiceDetail}>
+                  <h3 style={{ fontSize: '1.2rem', marginBottom: '1rem', color: 'var(--color-primary)' }}>Thông tin chuyến đi</h3>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.6rem', fontSize: '0.95rem' }}>
+                    <p><strong>Nhận xe:</strong> {new Date(trip.startTime).toLocaleString('vi-VN')} tại Hàm Nghi (TP. Hồ Chí Minh)</p>
+                    <p>
+                      <strong>Trả xe:</strong> {trip.status === 'ONGOING' ? <span style={{ color: '#d97706', fontWeight: 600 }}>Chưa trả xe (Thời gian đang tính)</span> : `${new Date(trip.endTime).toLocaleString('vi-VN')} tại Bất kỳ trạm VNGo nào`}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default MyBookings;
